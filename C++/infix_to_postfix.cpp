@@ -10,9 +10,9 @@
  *           'char3-Stack and Queue.pdf'의 7~9번 슬라이드에 적혀 있습니다.
  * 함수들 :
  *     main() : 데이터 한 줄 씩 읽어 출력한 후, postfix형태로 바뀐 수식을 출력하고
- *              계산 결과도 출력한다.
+ *              계산 결과도 출력합니다.
  *     postfix() : 한 줄의 식을 인자로 받아 postfix 형태로 바꿉니다.
- *                 이 함수는 반환 값이 없습니다.
+ *                 postfix 형태의 문자열을 반환합니다.
  *     eval() : postfix 형태의 식을 인자로 받아 식의 연산을 통해 결과를 얻어냅니다.
  *              이 함수는 결과 값을 반환합나다.
  * **************************************************************************************/
@@ -22,7 +22,7 @@
 #include <stack>
 using namespace std;
 
-void postfix(string expression);
+string postfix(string expression);
 int eval(string pf_expression);
 
 /**********************************************************************************
@@ -48,11 +48,11 @@ int main()
         cout << "1) Echo data (infix form) : " << buffer << endl;
 
         string expression(buffer);
-        postfix(expression);
+        string pf_exp(postfix(expression));
 
-        cout << "2) Conversion (postfix form) : " << expression << endl;
+        cout << "2) Conversion (postfix form) : " << pf_exp << endl;
 
-        int result = eval(expression);
+        int result = eval(pf_exp);
 
         cout << "3) Result : " << result << endl;
 
@@ -64,12 +64,43 @@ int main()
 /*****************************************************************************
  * 함수 : postfix
  * 설명 : infix 형태의 식 한 줄을 인자로 받아 postfix 형태의 식으로 변환합니다.
- *        반환 값이 없습니다.
+ *        문자열을 반환합니다.
  * 변수들 :
  * ***************************************************************************/
-void postfix(string exp)
+string postfix(const string exp)
 {
+    stack<char> operators;
+    string postfix_expression;
+    for (int i=0; i<exp.length(); i++)
+    {
+        if (48 <= (int)exp[i] && (int)exp[i] <= 57) // (int)'0' = 48, (int)'1' = 49, ...
+        {
+            postfix_expression += exp[i];
+        }
+        else if (exp[i] == '(')
+        {
+            operators.push(exp[i]);
+        }
+        else if (exp[i] == ')')
+        {
+            
+        }
+        else
+        {
+            if ()
+            {
 
+            }
+            else
+            {
+                
+            }
+            
+        }
+        
+    }
+
+    return postfix_expression;
 }
 
 /*****************************************************************************
