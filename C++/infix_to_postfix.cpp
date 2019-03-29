@@ -23,6 +23,7 @@
 using namespace std;
 
 string postfix(string expression);
+bool priority_compare(char c1, char c2);
 int eval(string pf_expression);
 
 /**********************************************************************************
@@ -54,7 +55,7 @@ int main()
 
         int result = eval(pf_exp);
 
-        cout << "3) Result : " << result << endl;
+        cout << "3) Result : " << result << endl;*
 
         cout << "---------------------------------------------------" << endl;
     }
@@ -66,11 +67,14 @@ int main()
  * 설명 : infix 형태의 식 한 줄을 인자로 받아 postfix 형태의 식으로 변환합니다.
  *        문자열을 반환합니다.
  * 변수들 :
+ *        brackets : 연산자들을 담아 놓을 스택입니다.
+ *        postfix_expression : postfix 형태로 바뀌는 식을 저장할 변수입니다.
  * ***************************************************************************/
 string postfix(const string exp)
 {
-    stack<char> operators;
+    stack<char> brackets;
     string postfix_expression;
+
     for (int i=0; i<exp.length(); i++)
     {
         if (48 <= (int)exp[i] && (int)exp[i] <= 57) // (int)'0' = 48, (int)'1' = 49, ...
@@ -79,28 +83,81 @@ string postfix(const string exp)
         }
         else if (exp[i] == '(')
         {
-            operators.push(exp[i]);
+            brackets.push(exp[i]);
         }
         else if (exp[i] == ')')
         {
-            
+            while (brackets.top() != '(')
+            {
+                postfix_expression += brackets.top();
+                brackets.pop();
+            }
+            brackets.pop();
         }
         else
         {
-            if ()
+            // 스택이 빈 경우, 비교 과정 없이 바로 스택에 올리기 위해 조건문을 추가했습니다.
+            if (brackets.empty())
             {
+                brackets.push(exp[i]);
+                continue;
+            }
 
-            }
-            else
+            if (!priority_compare(brackets.top(), exp[i]))
             {
-                
+                postfix_expression += brackets.top();
+                brackets.pop();
             }
-            
+            brackets.push(exp[i]);
         }
-        
+    }
+
+    while (!brackets.empty())
+    {
+        postfix_expression += brackets.top();
+        brackets.pop();
     }
 
     return postfix_expression;
+}
+
+/*****************************************************************************
+ * 함수 : priority_compare
+ * 설명 : 두 연산자 사이의 우선 순위를 비교합니다.
+ *        첫 번째 인자의 우선 순위가 두 번째 인자보다 작으면 true,
+ *        아니면 false를 반환합니다.
+ * 변수들 :
+ *        operators : 나올 수 있는 모든 연산자를 담아 놓은 배열입니다.
+ *        priority : operators 안에 담긴 연산자들의 순서에 맞춰
+ *                   우선 순위를 저장한 배열입니다.
+ *        lprior, rprior : 우선 순위를 저장할 정수형 변수입니다.
+ * ***************************************************************************/
+bool priority_compare(char c1, char c2)
+{
+    const char operators[6] = {'(', '+', '-', '*', '/', ')'};
+    const int priority[6] = {0, 1, 1, 2, 2, 3};
+    int lprior, rprior;
+
+    for (int i=0; i<6; i++)
+    {
+        if (operators[i] == c1)
+        {
+            lprior = priority[i];
+        }
+        else if (operators[i] == c2)
+        {
+            rprior = priority[i];
+        }
+    }
+
+    if (lprior <= rprior)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 /*****************************************************************************
