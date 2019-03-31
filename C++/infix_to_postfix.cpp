@@ -22,7 +22,7 @@
 #include <stack>
 using namespace std;
 
-string postfix(string expression);
+void postfix(string &expression);
 bool priority_compare(char c1, char c2);
 int eval(string pf_expression);
 
@@ -48,9 +48,10 @@ int main()
     {
         cout << "1) Echo data (infix form) : " << buffer << endl;
         string expression(buffer);
-        string pf_exp(postfix(expression));
-        cout << "2) Conversion (postfix form) : " << pf_exp << endl;
-        int result = eval(pf_exp);
+        string *exp = &expression;
+        postfix(*exp);
+        cout << "2) Conversion (postfix form) : " << expression << endl;
+        int result = eval(expression);
         cout << "3) Result : " << result << endl;
         cout << "---------------------------------------------------" << endl;
     }
@@ -65,7 +66,7 @@ int main()
  *        brackets : 연산자들을 담아 놓을 스택입니다.
  *        postfix_expression : postfix 형태로 바뀌는 식을 저장할 변수입니다.
  * ***************************************************************************/
-string postfix(string exp)
+void postfix(string &exp)
 {
     stack<char> brackets;
     string postfix_expression;
@@ -114,7 +115,7 @@ string postfix(string exp)
         postfix_expression += brackets.top();
         brackets.pop();
     }
-    return postfix_expression;
+    exp = postfix_expression;
 }
 
 /*****************************************************************************
