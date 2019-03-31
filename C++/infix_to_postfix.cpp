@@ -47,16 +47,11 @@ int main()
     while (reader.getline(buffer, 80))
     {
         cout << "1) Echo data (infix form) : " << buffer << endl;
-
         string expression(buffer);
         string pf_exp(postfix(expression));
-
         cout << "2) Conversion (postfix form) : " << pf_exp << endl;
-
         int result = eval(pf_exp);
-
-        cout << "3) Result : " << result << endl;*
-
+        cout << "3) Result : " << result << endl;
         cout << "---------------------------------------------------" << endl;
     }
     reader.close();
@@ -70,13 +65,17 @@ int main()
  *        brackets : 연산자들을 담아 놓을 스택입니다.
  *        postfix_expression : postfix 형태로 바뀌는 식을 저장할 변수입니다.
  * ***************************************************************************/
-string postfix(const string exp)
+string postfix(string exp)
 {
     stack<char> brackets;
     string postfix_expression;
-
     for (int i=0; i<exp.length(); i++)
     {
+        if (exp[i] == ' ') // 빈 칸을 무시합니다.
+        {
+            continue;
+        }
+
         if (48 <= (int)exp[i] && (int)exp[i] <= 57) // (int)'0' = 48, (int)'1' = 49, ...
         {
             postfix_expression += exp[i];
@@ -102,7 +101,6 @@ string postfix(const string exp)
                 brackets.push(exp[i]);
                 continue;
             }
-
             if (!priority_compare(brackets.top(), exp[i]))
             {
                 postfix_expression += brackets.top();
@@ -111,20 +109,18 @@ string postfix(const string exp)
             brackets.push(exp[i]);
         }
     }
-
     while (!brackets.empty())
     {
         postfix_expression += brackets.top();
         brackets.pop();
     }
-
     return postfix_expression;
 }
 
 /*****************************************************************************
  * 함수 : priority_compare
  * 설명 : 두 연산자 사이의 우선 순위를 비교합니다.
- *        첫 번째 인자의 우선 순위가 두 번째 인자보다 작으면 true,
+ *        첫 번째 인자의 우선 순위가 두 번째 인자보다 작거나 같으면 true,
  *        아니면 false를 반환합니다.
  * 변수들 :
  *        operators : 나올 수 있는 모든 연산자를 담아 놓은 배열입니다.
@@ -134,22 +130,20 @@ string postfix(const string exp)
  * ***************************************************************************/
 bool priority_compare(char c1, char c2)
 {
-    const char operators[6] = {'(', '+', '-', '*', '/', ')'};
-    const int priority[6] = {0, 1, 1, 2, 2, 3};
+    char operators[6] = {'(', '+', '-', '*', '/', ')'};
+    int priority[6] = {0, 1, 1, 2, 2, 3};
     int lprior, rprior;
-
     for (int i=0; i<6; i++)
     {
         if (operators[i] == c1)
         {
             lprior = priority[i];
         }
-        else if (operators[i] == c2)
+        if (operators[i] == c2)
         {
             rprior = priority[i];
         }
     }
-
     if (lprior <= rprior)
     {
         return true;
@@ -165,8 +159,43 @@ bool priority_compare(char c1, char c2)
  * 설명 : postfix 형태의 식 한 줄을 인자로 받아 식의 연산을 통해 결과를 구합니다.
  *        결과 값을 반환합니다.
  * 변수들 :
+ *        operands : 숫자들을 쌓아 올릴 스택입니다.
+ *        sub_result : 두 피연산자 사이의 연산을 수행한 결과를 담는 변수입니다.
  * ***************************************************************************/
 int eval(string pf_exp)
 {
-
+    stack<int> operands;
+    for (int i=0; i<pf_exp.length(); i++)
+    {
+        int sub_result;
+        if (48 <= (int)pf_exp[i] && (int)pf_exp[i] <= 57)
+        {
+            operands.push((int)pf_exp[i] - 48); // (int)'0' = 48, (int)'1' = 49, ...
+        }
+        else
+        {
+            int operand2 = operands.top();
+            operands.pop();
+            int operand1 = operands.top();
+            operands.pop();
+            if (pf_exp[i] == '+')
+            {
+                sub_result = operand1 + operand2;
+            }
+            else if (pf_exp[i] == '-')
+            {
+                sub_result = operand1 - operand2;
+            }
+            else if (pf_exp[i] == '*')
+            {
+                sub_result = operand1 * operand2;
+            }
+            else if (pf_exp[i] == '/')
+            {
+                sub_result = operand1 / operand2;
+            }
+            operands.push(sub_result);
+        }
+    }
+    return operands.top();
 }
