@@ -24,7 +24,7 @@ using namespace std;
 
 void postfix(string &expression);
 bool priority_compare(char c1, char c2);
-int eval(string pf_expression);
+double eval(string pf_expression);
 
 /**********************************************************************************
  * 함수 : main
@@ -51,7 +51,7 @@ int main()
         string *exp = &expression;
         postfix(*exp);
         cout << "2) Conversion (postfix form) : " << expression << endl;
-        int result = eval(expression);
+        double result = eval(expression);
         cout << "3) Result : " << result << endl;
         cout << "---------------------------------------------------" << endl;
     }
@@ -144,7 +144,7 @@ bool priority_compare(char c1, char c2)
             rprior = priority[i];
         }
     }
-    if (lprior <= rprior)
+    if (lprior < rprior)
     {
         return true;
     }
@@ -162,21 +162,21 @@ bool priority_compare(char c1, char c2)
  *        operands : 숫자들을 쌓아 올릴 스택입니다.
  *        sub_result : 두 피연산자 사이의 연산을 수행한 결과를 담는 변수입니다.
  * ***************************************************************************/
-int eval(string pf_exp)
+double eval(string pf_exp)
 {
-    stack<int> operands;
+    stack<double> operands;
     for (int i=0; i<pf_exp.length(); i++)
     {
-        int sub_result;
+        double sub_result;
         if (48 <= (int)pf_exp[i] && (int)pf_exp[i] <= 57)
         {
             operands.push((int)pf_exp[i] - 48); // (int)'0' = 48, (int)'1' = 49, ...
         }
         else
         {
-            int operand2 = operands.top();
+            double operand2 = operands.top();
             operands.pop();
-            int operand1 = operands.top();
+            double operand1 = operands.top();
             operands.pop();
             if (pf_exp[i] == '+')
             {
