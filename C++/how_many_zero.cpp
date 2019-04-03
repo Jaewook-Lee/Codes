@@ -1,7 +1,8 @@
 #include <iostream>
+#include <cmath>
 using namespace std;
 
-int numberOfZero(int array[], int n);
+int numberOfZero(const int array[], int n);
 
 int main(void)
 {
@@ -23,21 +24,52 @@ int main(void)
     }
 }
 
-int numberOfZero(int array[], int n)
+int numberOfZero(const int array[], int n)
 {
-    double mul = 1;
-    int count = 0;
+    int two_cnt = 0;
+    int five_cnt = 0;
 
+    int divided;
     for (int i=0; i<n; i++)
     {
-        mul *= array[i];
+        divided = array[i];
+        for (int j=2; j<=(int)sqrt(divided); j++)
+        {
+            if (divided % j == 0)
+            {
+                divided /= j;
+                if (j == 2)
+                {
+                    two_cnt++;
+                }
+                else if (j == 5)
+                {
+                    five_cnt++;
+                }
+
+                j = 1;
+            }
+        }
+        if (divided == 2)
+        {
+            two_cnt++;
+        }
+        else if (divided == 5)
+        {
+            five_cnt++;
+        }
     }
 
-    while (mul % 10 == 0)
+    if (two_cnt * five_cnt == 0)
     {
-        count++;
-        mul /= 10;
+        return 0;
     }
-
-    return count;
+    if (two_cnt <= five_cnt)
+    {
+        return two_cnt;
+    }
+    else
+    {
+        return five_cnt;
+    }
 }
