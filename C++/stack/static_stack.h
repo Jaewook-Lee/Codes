@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-const int SIZE = 100;
+const int SIZE = 2;
 class StaticStack
 {
     private:
-        int stack[SIZE];
+        char stack[SIZE];
         int top;
 
     public:
@@ -18,16 +18,23 @@ class StaticStack
         {
             if (top == SIZE - 1)
             {
-                cout << "Stack is Full!" << endl;
+                cout << "StackFull!" << endl;
             }
             else
             {
                 stack[++top] = value;
             }
         }
-        int pop()
+        char pop()
         {
-            return stack[top--];
+            if (top == -1)
+            {
+                cout << "StackEmpty" << endl;
+            }
+            else
+            {
+                return stack[top--];
+            }
         }
         int isEmpty()
         {
@@ -57,14 +64,21 @@ class StaticStack
 
             if (top == -1)
             {
-                cout << "Stack is Empty!!" << endl;
+                cout << "StackEmpty!!" << endl;
             }
             else
             {
                 temp = top;
                 while (temp != -1)
                 {
-                    cout << stack[temp--] << "\n";
+                    if (temp == 0)
+                    {
+                        cout << stack[temp--] << endl;
+                    }
+                    else
+                    {
+                        cout << stack[temp--] << ", ";
+                    }
                 }
             }
         }
