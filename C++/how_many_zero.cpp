@@ -1,5 +1,4 @@
 #include <iostream>
-#include <cmath>
 using namespace std;
 
 int numberOfZero(const int array[], int n);
@@ -33,7 +32,7 @@ int numberOfZero(const int array[], int n)
     for (int i=0; i<n; i++)
     {
         divided = array[i];
-        for (int j=2; j<=(int)sqrt(divided); j++)
+        for (int j=2; j*j<=divided; j++)
         {
             if (divided % j == 0)
             {
