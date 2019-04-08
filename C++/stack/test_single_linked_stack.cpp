@@ -1,10 +1,10 @@
 #include <iostream>
-#include "linked_stack.h"
+#include "single_linked_stack.h"
 using namespace std;
 
 int main()
 {
-    LinkedStack stack;
+    SingleLinkedStack stack;
     stack.createStack();
     stack.traverse();
 

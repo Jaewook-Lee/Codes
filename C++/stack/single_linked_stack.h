@@ -14,13 +14,13 @@ struct Node
         }
 };
 
-class LinkedStack
+class SingleLinkedStack
 {
     private:
         Node *head;
     public:
-        LinkedStack() {head = 0;}
-        ~LinkedStack() {};
+        SingleLinkedStack() {head = 0;}
+        ~SingleLinkedStack() {};
         void createStack();
         void push(int);
         int pop();
@@ -29,12 +29,12 @@ class LinkedStack
         void search(int);
 };
 
-void LinkedStack::createStack()
+void SingleLinkedStack::createStack()
 {
     head = 0;
 }
 
-void LinkedStack::push(int num)
+void SingleLinkedStack::push(int num)
 {
     Node *temp = new Node(num);
 
@@ -45,7 +45,7 @@ void LinkedStack::push(int num)
     head = temp;
 }
 
-int LinkedStack::pop()
+int SingleLinkedStack::pop()
 {
     if (!isEmpty())
     {
@@ -65,7 +65,7 @@ int LinkedStack::pop()
     }
 }
 
-bool LinkedStack::isEmpty()
+bool SingleLinkedStack::isEmpty()
 {
     if (head == 0)
     {
@@ -77,7 +77,7 @@ bool LinkedStack::isEmpty()
     }
 }
 
-void LinkedStack::traverse()
+void SingleLinkedStack::traverse()
 {
     Node *p;
 
@@ -96,7 +96,7 @@ void LinkedStack::traverse()
     }
 }
 
-void LinkedStack::search(int target)
+void SingleLinkedStack::search(int target)
 {
     Node *p;
 
