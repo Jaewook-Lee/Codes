@@ -55,7 +55,7 @@ void SingleLinkedList::traverse()
     }
     else
     {
-        cout << "SingleLinkedList is Empty!\n";
+        cout << "List is empty!\n";
     }
 }
 
@@ -125,7 +125,7 @@ void SingleLinkedList::deleteNode(int num)
         }
         else
         {
-            cout << num << "is not in the SingleLinkedList.\n";
+            cout << num << " is not in the list.\n";
         }       
     }
 }
@@ -149,13 +149,13 @@ void SingleLinkedList::search(int num)
             p = p->next;
         }
         if (p)
-            cout << p->data << "is found." << endl;
+            cout << p->data << " is found." << endl;
         else
-            cout << num << "is not in the list." << endl;
+            cout << num << " is not in the list." << endl;
     }
     else
     {
-        cout << "SingleLinkedList is empty\n";
+        cout << "List is empty\n";
     }
     
 }
