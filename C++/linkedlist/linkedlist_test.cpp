@@ -23,5 +23,6 @@ int main()
     list.search(100);
 
     list.~SingleLinkedList();
+    list.insertNode(160);
     list.traverse();
 }
