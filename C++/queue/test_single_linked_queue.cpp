@@ -15,7 +15,7 @@ int main()
     queue.traverse();
 
     queue.search(7);
-    queue.search(10);
+    queue.search(11);
 
     for (int i=0; i<5; i++)
     {
@@ -23,10 +23,7 @@ int main()
     }
     queue.traverse();
 
-    for (int i=0; i<5; i++)
-    {
-        queue.dequeue();
-    }
-    queue.dequeue();
+    queue.~SingleLinkedQueue();
+    queue.enqueue(25);
     queue.traverse();
 }

@@ -21,7 +21,7 @@ class SingleLinkedQueue
 
     public:
         SingleLinkedQueue() {front = 0; rear = 0;}
-        ~SingleLinkedQueue() {};
+        ~SingleLinkedQueue();
         void enqueue(int);
         int dequeue();
         bool isEmpty();
@@ -29,6 +29,18 @@ class SingleLinkedQueue
         void search(int);
 
 };
+
+SingleLinkedQueue::~SingleLinkedQueue()
+{
+    Node *p;
+
+    while (front != 0)
+    {
+        p = front;
+        front = front ->next;
+        delete p;
+    }
+}
 
 void SingleLinkedQueue::enqueue(int value)
 {

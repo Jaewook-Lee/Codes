@@ -16,9 +16,13 @@ int main()
     stack.search(0);
     stack.search(3);
 
-    for (int i=0; i<5; i++)
+    for (int i=0; i<3; i++)
     {
         stack.pop();
     }
-    stack.pop();
+    stack.traverse();
+
+    stack.~SingleLinkedStack();
+    stack.push(19);
+    stack.traverse();
 }

@@ -20,13 +20,25 @@ class SingleLinkedStack
         Node *head;
     public:
         SingleLinkedStack() {head = 0;}
-        ~SingleLinkedStack() {};
+        ~SingleLinkedStack();
         void push(int);
         int pop();
         bool isEmpty();
         void traverse();
         void search(int);
 };
+
+SingleLinkedStack::~SingleLinkedStack()
+{
+    Node *p;
+
+    while (head != 0){
+        p = head;
+        head = head->next;
+        delete p;
+    }
+    
+}
 
 void SingleLinkedStack::push(int num)
 {
