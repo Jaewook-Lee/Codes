@@ -21,18 +21,12 @@ class SingleLinkedStack
     public:
         SingleLinkedStack() {head = 0;}
         ~SingleLinkedStack() {};
-        void createStack();
         void push(int);
         int pop();
         bool isEmpty();
         void traverse();
         void search(int);
 };
-
-void SingleLinkedStack::createStack()
-{
-    head = 0;
-}
 
 void SingleLinkedStack::push(int num)
 {

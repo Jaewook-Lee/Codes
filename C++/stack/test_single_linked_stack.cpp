@@ -5,8 +5,8 @@ using namespace std;
 int main()
 {
     SingleLinkedStack stack;
-    stack.createStack();
     stack.traverse();
+    stack.pop();
 
     for (int i=1; i<6; i++)
     {
