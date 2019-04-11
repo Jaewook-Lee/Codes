@@ -1,7 +1,6 @@
 # https://github.com/SCKIMOSU/Numerical-Analysis/blob/master/newton.py#L29
 
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 def sech(x):
