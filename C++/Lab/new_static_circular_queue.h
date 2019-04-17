@@ -76,21 +76,10 @@ class StaticCircularQueue
             else
             {
                 i = front + 1;
-                int display_cnt = count;
                 while (i != rear)
                 {
-                    if (display_cnt == 0)
-                    {
-                        break;
-                    }
-
-                    if (i == C_QUEUE_SIZE)
-                    {
-                        i = 0;
-                    }
                     cout << char_queue[i] << ", ";
-                    i += 1;
-                    display_cnt--;
+                    i = (i + 1) % C_QUEUE_SIZE;
                 }
                 cout << endl;
             }

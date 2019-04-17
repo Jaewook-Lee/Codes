@@ -1,7 +1,7 @@
 #include <iostream>
-#include "static_stack.h"
-#include "static_queue.h"
-#include "static_circular_queue.h"
+#include "new_static_stack.h"
+#include "new_static_queue.h"
+#include "new_static_circular_queue.h"
 using namespace std;
 
 int main()
