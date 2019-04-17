@@ -7,7 +7,6 @@
 *        연결 리스트를 만들어 조건에 만족하는 내용만 출력하게 하는 것입니다.
 * 함수들 :
 * makeSLL()
-* mergeList()
 * Node() : 구조체의 생성자입니다.
 * SinglyLinkedList() : 클래스 생성자입니다.
 * insertNode() : SinglyLinkedList에 새 노드를 삽입하는 함수입니다.
@@ -21,12 +20,9 @@
 * 3. 연결 리스트의 주소와 첫 번째 파일을 갖고 연결 리스트 하나를 생성합니다.(makeSLL 함수 documentation 참고)
 * 4. 연결 리스트의 내용을 출력합니다.(SinglyLinkedList 클래스의 traverse 함수 documentation 참고)
 * 5. 특정 등급을 가진 학생들 관련 내용을 출력합니다.(SinglyLinkedList 클래스의 filterGrade 함수 documentation 참고)
-* 6. 또 다른 연결 리스트 하나를 선언합니다.
-* 7. 선언한 연결 리스트의 주소를 담는 포인터 변수를 하나 생성합니다.
-* 8. 연결 리스트의 주소와 두 번째 파일을 갖고 연결 리스트 하나를 생성합니다.
-* 9. 두 연결 리스트의 주소를 가지고 연결 리스트들을 병합합니다.(mergeList 함수 documentation 참고)
-* 10. 특정 전공인 학생들 관련 내용을 출력합니다.(SinglyLinkedList 클래스의 filterMajor 함수 documentation 참고)
-* 11. 프로그램 종료
+* 6. 선언한 연결 리스트에 두 번째 파일의 내용을 추가합니다.
+* 7. 특정 전공인 학생들 관련 내용을 출력합니다.(SinglyLinkedList 클래스의 filterMajor 함수 documentation 참고)
+* 8. 프로그램 종료
 * ***************************************************************************************************************/
 #include <iostream>
 #include <fstream>
@@ -280,20 +276,15 @@ void SinglyLinkedList::filterMajor(string s_major)
 
 
 void makeSLL(const string file_name, SinglyLinkedList *list);
-void mergeList(const SinglyLinkedList *a, const SinglyLinkedList *b, SinglyLinkedList *merge);
 
 /******************************************************************************************************************
  * 함수 : main()
  * 설명 : "students_file.txt" 파일 안에 담긴 내용을 바탕으로 연결 리스트 하나를 생성합니다.
- *        두 가지 테스트를 한 후 "students_file2.txt" 파일 안에 담긴 내용을 바탕으로 또 다른
- *        연결 리스트를 생성합니다. 그 후에 두 연결 리스트를 하나의 연결 리스트로 병합합니다.
+ *        두 가지 테스트를 한 후 "students_file2.txt" 내용을 연결 리스트에 추가합니다.
  * 변수 :
- *      students_list : SinglyLinkedList 타입의 연결 리스트입니다. "students_file.txt"내용이 담겨있습니다.
- *      students_list2 : SinglyLinkedList 타입의 연결 리스트입니다. "students_file2.txt"내용이 담겨있습니다.
- *      students_database : SinglyLinkedList 타입의 연결 리스트입니다. 위의 두 연결 리스트를 병합한 결과를 가집니다.
+ *      students_list : SinglyLinkedList 타입의 연결 리스트입니다.
+ *                      처음에는 "students_file.txt"내용만 담겨있고, 나중에는 "students_file2.txt" 내용도 추가됩니다.
  *      *list_ptr: students_list의 주소를 가지는 포인터 변수입니다.
- *      *list_ptr2 : students_list2의 주소를 가지는 포인터 변수입니다.
- *      *db_ptr : students_database의 주소를 가지는 포인터 변수입니다.
  * ***************************************************************************************************************/
 int main()
 {
@@ -303,14 +294,8 @@ int main()
     students_list.traverse();
     students_list.filterGrade('A');
 
-    SinglyLinkedList students_list2 = SinglyLinkedList();
-    SinglyLinkedList *list_ptr2 = &students_list2;
-    makeSLL("students_file2.txt", list_ptr2);
-
-    SinglyLinkedList students_database = SinglyLinkedList();
-    SinglyLinkedList *db_ptr = &students_database;
-    mergeList(list_ptr, list_ptr2, db_ptr);
-    students_database.filterMajor("CS");
+    makeSLL("students_file2.txt", list_ptr);
+    students_list.filterMajor("CS");
 }
 
 /*****************************************************************************************************************
@@ -356,89 +341,4 @@ void makeSLL(const string file_name, SinglyLinkedList *list)
         list->insertNode(s_name, s_id, s_major, s_grade);
     }
     reader.close();
-}
-
-/********************************************************************************************************************
- * 함수 : mergeList()
- * 설명 : 두 연결 리스트의 내용을 세 번째 parameter로 온 연결 리스트의 주소에서 하나로 합칩니다.
- * 변수 :
- *      *a : 첫 번째 연결 리스트의 주소가 담긴 포인터 변수입니다.
- *      *b : 두 번째 연결 리스트의 주소가 담긴 포인터 변수입니다.
- *      *merge : 병합될 연결 리스트의 주소가 담긴 포인터 변수입니다.
- *      *p : 병합 중 첫 번째 연결 리스트의 내용을 가리키는 포인터 변수입니다.
- *      *q : 병합 중 두 번째 연결 리스트의 내용을 가리키는 포인터 변수입니다.
- * 알고리즘 :
- * 0. 함수 시작
- * 1. 첫 번째 연결 리스트의 내용들을 가리킬 포인터 변수 하나를 선언합니다.
- * 2. 두 번째 연결 리스트의 내용들을 가리킬 포인터 변수 하나를 선언합니다.
- * 3-1. 두 연결 리스트 모두 빈 연결 리스트면 빈 리스트를 보냈다고 출력합니다.
- * 3-2. 두 연결 리스트 중 하나만 빈 연결 리스트면 비어 있지 않은 리스트의 주소를 merge에 할당합니다.
- * 3-3. 두 연결 리스트 모두 빈 연결 리스트가 아닐 경우
- * 3-3-1. p에 a의 head 주소를 할당합니다.
- * 3-3-2. q에 b의 head 주소를 할당합니다.
- * 3-3-3. p와 q 모두 NULL이 아닐 동안 아래의 반복문을 실행합니다.
- * 3-3-3-1. p에 담긴 이름이 q에 담긴 이름보다 빠른 이름이면 p가 가리키는 내용들을 merge의 inserNode의 argument로 보냅니다.
- * 3-3-3-1-1. p에 p의 next 주소를 할당합니다.
- * 3-3-3-2. 아니면 q가 가리키는 내용들을 merge의 inserNode의 argument로 보냅니다.
- * 3-3-3-2-1. q에 q의 next 주소를 할당합니다.
- * 3-3-4. 만약 p가 NULL이 아니면 아래의 반복문을 실행합니다.
- * 3-3-4-1. p가 가리키는 내용들을 merge의 inserNode의 argument로 보냅니다.
- * 3-3-4-2. p에 p의 next 주소를 할당합니다.
- * 3-3-5. 만약 q가 NULL이 아니면 아래의 반복문을 실행합니다.
- * 3-3-5-1. q가 가리키는 내용들을 merge의 inserNode의 argument로 보냅니다.
- * 3-3-5-2. q에 q의 next 주소를 할당합니다.
- * 4. 함수 종료
- * *******************************************************************************************************************/
-void mergeList(SinglyLinkedList *a, SinglyLinkedList *b, SinglyLinkedList *merge)
-{
-    Node *p, *q;
-
-    if (a->head == 0 && b->head == 0)
-    {
-        cout << "You sent empty list.\n";
-    }
-    else if (a->head != 0 && b->head == 0)
-    {
-        merge = a;
-    }
-    else if (a->head == 0 && b->head != 0)
-    {
-        merge = b;
-    }
-    else
-    {
-        p = a->head;
-        q = b->head;
-
-        while (p != 0 && q != 0)
-        {
-            if (p->name < q->name)
-            {
-                merge->insertNode(p->name, p->id, p->major, p->grade);
-                p = p->next;
-            }
-            else
-            {
-                merge->insertNode(q->name, q->id, q->major, q->grade);
-                q = q->next;
-            }
-            
-        }
-        if (p != 0)
-        {
-            while (p != 0)
-            {
-                merge->insertNode(p->name, p->id, p->major, p->grade);
-                p = p->next;
-            }
-        }
-        else if (q != 0)
-        {
-            while (q != 0)
-            {
-                merge->insertNode(q->name, q->id, q->major, q->grade);
-                q = q->next;
-            }
-        }
-    }
 }
