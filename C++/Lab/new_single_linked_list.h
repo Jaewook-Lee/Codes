@@ -65,11 +65,13 @@ void SingleLinkedList::inverse(Node *h)
 {
     if (h == NULL)
     {
-        cout << "\n";
         return;
     }
     inverse(h->next);
     cout << h->data << " ";
+
+    if (h == head)
+        cout << endl;
 }
 
 void SingleLinkedList::printLast()
