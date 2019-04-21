@@ -1,5 +1,7 @@
 def hanoi(n, start, mid, end):
-    if n == 1:
+    if n <= 0:
+        print("You have no disks!")
+    elif n == 1:
         print("%d : %c -> %c" %(n, start, end))
     else:
         hanoi(n-1, start, end, mid)
@@ -8,4 +10,4 @@ def hanoi(n, start, mid, end):
 
 
 if __name__ == '__main__':
-    hanoi(4, 'A', 'B', 'C')
+    hanoi(5, 'A', 'B', 'C')
