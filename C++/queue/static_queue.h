@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-const int SIZE = 3;
+const int SIZE = 10;
 class StaticQueue
 {
     private:
-        char char_queue[SIZE];
+        int queue[SIZE];
         int front, rear;
 
     public:
@@ -15,7 +15,7 @@ class StaticQueue
             rear = -1;
         }
 
-        void enqueue(char value)
+        void enqueue(int value)
         {
             if (rear == SIZE - 1)
             {
@@ -23,19 +23,19 @@ class StaticQueue
             }
             else
             {
-                char_queue[++rear] = value;
+                queue[++rear] = value;
             }
         }
-        char dequeue()
+        int dequeue()
         {
-            char item;
+            int item;
             if (front == rear)
             {
                 cout << "QueueEmpty." << endl;
             }
             else
             {
-                item = char_queue[++front];
+                item = queue[++front];
                 return item;
             }
         }
@@ -75,11 +75,11 @@ class StaticQueue
                 {
                     if (i == rear)
                     {
-                        cout << char_queue[i] << endl;
+                        cout << queue[i] << endl;
                     }
                     else
                     {
-                        cout << char_queue[i] << ", ";
+                        cout << queue[i] << ", ";
                     }
                     i += 1;
                 }

@@ -1,14 +1,13 @@
 #include <iostream>
 using namespace std;
 
-const int SIZE = 3;
+const int SIZE = 10;
 class StaticCircularQueue
 {
     private:
-        char char_queue[SIZE];
+        int queue[SIZE];
         int front, rear;
-        int flag = 0; // For checking existing
-
+        int element_count = 0;
     public:
         StaticCircularQueue()
         {
@@ -16,36 +15,38 @@ class StaticCircularQueue
             rear = -1;
         }
 
-        void c_enqueue(char value) // For using Queue as Circular.
+        void c_enqueue(int value) // For using Queue as Circular.
         {
-            if (front == rear && flag == 1)
-            {
-                cout << "Queue is Full." << endl;
-            }
+            if ((front == rear) && (element_count == SIZE))
+                cout << "Queue is full." << endl;
             else
             {
-                char_queue[rear] = value;
                 rear = (rear + 1) % SIZE;
+                queue[rear] = value;
+                element_count++;
             }
         }
-        char c_dequeue() // For using Queue as Circular.
+        int c_dequeue() // For using Queue as Circular.
         {
-            char item;
-            if (front == rear && flag == 0)
+            int item;
+
+            if ((front == rear) && (element_count == 0))
             {
-                cout << "Queue is Empty." << endl;
+                cout << "Queue is empty." << endl;
+                exit(-1);
             }
             else
             {
-                item = char_queue[front];
                 front = (front + 1) % SIZE;
-                flag = 0;
+                item = queue[front];
+                element_count--;
+
                 return item;
             }
         }
         int queue_full()
         {
-            if (rear == SIZE - 1)
+            if (element_count == SIZE)
             {
                 return 1;
             }
@@ -56,7 +57,7 @@ class StaticCircularQueue
         }
         int queue_empty()
         {
-            if (front == rear)
+            if (element_count == 0)
             {
                 return 1;
             }
@@ -67,20 +68,20 @@ class StaticCircularQueue
         }
         void displayCircularQueue()
         {
-            int i;
-            if (front == rear)
-            {
-                cout << "Can't display. Queue is empty." << endl;
-            }
+            if (element_count == 0)
+                cout << "Queue is empty!" << endl;
             else
             {
-                i = front + 1;
-                cout << "-------Your Queue-------" << endl;
-                while (i <= rear)
+                int printer = (front + 1) % SIZE;
+                int display_cnt = element_count;
+
+                while (display_cnt != 0)
                 {
-                    cout << char_queue[i] << "\n";
-                    i += 1;
+                    cout << queue[printer] << " ";
+                    display_cnt--;
+                    printer = (printer + 1) % SIZE;
                 }
+                cout << endl;
             }
         }
 };

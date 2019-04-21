@@ -6,13 +6,13 @@ int main()
 {
     StaticQueue int_queue = StaticQueue();
     // cout << int_queue.front << int_queue.rear << endl; --> Error!
-    for (int i=1; i<=100; i++)
+    for (int i=1; i<=10; i++)
     {
         int_queue.enqueue(i);
     }
     int_queue.displayQueue();
 
-    for (int i=0; i<50; i++)
+    for (int i=0; i<5; i++)
     {
         int_queue.dequeue();
     }
