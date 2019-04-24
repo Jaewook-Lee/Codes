@@ -54,7 +54,7 @@ class Stack
         {
             cout << stack[i] << " ";
         }
-        cout << "\n";
+        cout << endl;
     }
 };
 
