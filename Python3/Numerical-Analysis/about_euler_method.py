@@ -22,8 +22,8 @@ for t in range(0, 5):
     vel.append(v)
 time = [0, 1, 2, 3, 4]
 
-plt.plot(time, vel, '-ro', label="Original")
-plt.plot(time, vel_eulor, '-bo', label="Eulor")
+plt.plot(time, vel, '-r<', label="Original")
+plt.plot(time, vel_eulor, '-b>', label="Euler")
 plt.grid(True)
 plt.legend()
 plt.show()
