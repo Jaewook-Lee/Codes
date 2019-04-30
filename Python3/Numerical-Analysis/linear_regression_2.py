@@ -16,5 +16,5 @@ xysum = sum(x * y)
 n = np.size(x)
 a1 = (n * xysum - xsum * ysum) / (n * np.sum(x**2) - xsum ** 2)
 a0 = ysum / n - xsum / n * a1
-print(p)
+print(p1)
 print(a1, a0)
