@@ -8,11 +8,11 @@ def Data_Genearion(num_points):
     #num_points = 50
     vectors_set = []
     for i in np.arange(num_points):
-        x = np.random.normal(2, 2) + 10
+        x = np.random.normal(2, 2) + 10 # Adding 10 indicates moving the mean in a positive direction by 10.
         y = x * 5 + (np.random.normal(0, 3)) * 2
         vectors_set.append([x, y])
 
-        x_data = [v[0] for v in vectors_set]
+    x_data = [v[0] for v in vectors_set]
     y_data = [v[1] for v in vectors_set]
 
     return  x_data, y_data
@@ -37,7 +37,7 @@ def Data_Learning(x_data, y_data):
     #lo.append(loss)
     optimizer = tf.train.GradientDescentOptimizer(0.0015)
     train = optimizer.minimize(loss)
-    init = tf.initialize_all_variables()
+    init = tf.global_variables_initializer()
     sess = tf.Session()
     sess.run(init)
 
