@@ -174,11 +174,6 @@ int main()
 {
     bool exit = false;
     BinarySearchTree bst;
-    bst.insertVal(bst.root, 30);
-    bst.insertVal(bst.root, 40);
-    bst.insertVal(bst.root, 20);
-    bst.insertVal(bst.root, 10);
-    bst.insertVal(bst.root, 50);
     while(!exit)
     {
         int selector;
