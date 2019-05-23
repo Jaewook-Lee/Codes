@@ -1,0 +1,121 @@
+body { margin: 0; padding: 0; color: #98a8b9; font-size: 16px; }
+section { width: 1168px; margin: auto; padding: 0 16px; }
+footer { margin-top: 5rem; padding: 2.5rem 0; border-top: #dedede solid 1px; }
+footer > div { width: 1168px; margin: auto; padding: 0 16px; }
+footer > div > ul { list-style-type: none; margin-top: 0.625rem; padding: 0; }
+footer a { text-decoration-line: none; }
+#section_header { margin: 5rem 0 2.5rem 0; }
+#section_header h1 { margin: 0; font-size: 32px; color: black; text-align: center; }
+#root_nav { background-color: #0c151c; padding: 0 8px; }
+#root_nav > a { padding: 8px 0px 8px 16px; margin-right: 8px; }
+#root_nav img { vertical-align: middle; }
+#account_anchor { float: right; }
+#root_index { margin-left: 500px }
+#info_header, #free_assign { padding: 80px 0; background-image: url("media/project/header_image.png"); color: white; }
+#info { width: 1200px; padding: 0 16px; margin: auto; }
+#info div { display: inline-block; }
+#info_text { padding-right: 27px; margin-right: 1px; }
+#bottom_black_divider { background-color: #0c151c; }
+#bottom_white_divider { background-color: white; }
+#info_picture { padding: 0 0 0 48px; }
+#button { background-color: #0078ff; border-radius: 3px; padding: 7px 36px 7px 40px; text-decoration: none; }
+#button:hover { background-color: #0060ff; }
+#developer_assignment_btn { margin: 32px 0 0 0; }
+#assign_button { margin: 0 8px; color: white; font-weight: 700; }
+#smallest_subtitle { font-weight: 500; font-size: 0.9em; color: #03a9f4; }
+#middle_subtitle { font-weight: 300; font-size: 1.2em; margin: 24px 0 0 0; }
+#largest_subtitle { font-weight: 500; font-size: 2.2em; margin: 16px 0 0 0; }
+#image_article { margin: auto; }
+#image_article img { margin-bottom: 16px; }
+#image_article div { display: inline-block; text-align: center; width: 33%; margin: auto; }
+#image_article h2 { color: black; font-size: 20px; margin: 0; }
+#image_article p { margin: 8px 0 0 0; }
+#section_divider { margin-bottom: 40px; text-align: center; }
+#divider_1 { width: 0.5rem; background-color: #ff9800; }
+#divider_2 { width: 1rem; background-color: #4caf50; }
+#divider_3 { width: 2.5rem; background-color: #0078ff; }
+#divider_4 { width: 1.5rem; background-color: #e91e63; }
+#developer_recruit_flow h3 { font-size: 20px; font-weight: 700; color: black; margin: 0; }
+#developer_recruit_flow ol { list-style-type: none; margin: 0 auto; padding: 0; max-width: 50rem; }
+#developer_recruit_flow li { margin-bottom: 24px; align-content: center; min-height: 15rem; }
+#developer_recruit_flow li > * { margin: 0; }
+#number { width: 5rem; height: 12.5rem; position: absolute; }
+#flow_number { font-size: 20px; font-weight: 700; }
+#flow_number::after { content: ''; width: 0.0625rem; height: 100%; background-color: #d7e2eb; position: absolute; top: 2.5rem; left: 50%; }
+#flow_image_1::before { content: ''; position: absolute; z-index: -1; left: 25rem; bottom: -25rem; width: 15rem; height: 15rem; border-radius: 62.5rem; transform: rotate(45deg);
+                        background: linear-gradient(90deg, white 6px, transparent 1%) center,linear-gradient(white 0, transparent 0%) center,#CDDC39; background-size: 0.5rem 0.5rem; }
+#flow_image_1::after { font-size: 14px; border-bottom-right-radius: 0.1875rem; border-top-right-radius: 0.1875rem; display: block; position: relative; bottom: 4.5rem; padding: 0.5rem 1rem;
+                        background-color: #263747; color: white; transform: translateX(-1rem);
+                        content: '2년 경력의 백엔드 개발자입니다. Java, Spring을 주로 사용합니다. 이직을 준비하고 있습니다.'}
+#flow_image_2::before { content: ''; position: absolute; z-index: -1; right: 25rem; bottom: -45rem; width: 15rem; height: 15rem; border-top-right-radius: 62.5rem; background-color: white;
+                        background: radial-gradient(circle, #FFC107 24%, transparent 24%),radial-gradient(circle, #FFC107 8%, transparent 8%); background-size: 1rem 1rem; background-position: 0 0, 0.5rem 0.5rem; }
+#flow_image_3::before { content: ''; position: absolute; z-index: -1; left: 15rem; top: 105rem; width: 15rem; height: 15rem; border-radius: 0.5rem;
+                        background: white radial-gradient(circle, #E9ECF3 30%, transparent 30%); background-size: 1rem 1rem; }
+#flow_image_3::after { font-size: 14px; border-bottom-right-radius: 0.1875rem; border-top-right-radius: 0.1875rem; display: block; position: relative; bottom: 3.5rem; padding: 0.5rem 1rem;
+                        background-color: #263747; color: white; transform: translateX(-1rem);
+                        content: '우리와 핏이 맞는것 같아요. 면접 제안을 보냅니다!' }
+#flow_image_4::before { content: ''; position: absolute; z-index: -1; transform: rotate(45deg); right: 15rem; top: 129rem; width: 15rem; height: 15rem;
+                        background: radial-gradient(circle, #4FC3F7 16%, transparent 0%); background-size: 0.75rem 0.75rem; }
+#carrot_info { background: url("media/project/carrot_market.jpeg"); background-size: cover; z-index: -1; height: 250px; border-radius: 1rem; padding-bottom: 56px; }
+#carrot_info > div { box-shadow: 0 0 0 1.5px rgba(50, 50, 124, 0.12); margin: 0; padding: 40px; z-index: 0; position: relative; top: 3.5rem; left: 3.5rem;
+                           background-color: white; border-radius: 1rem; color: #98a8b9; font-size: 14px; }
+#carrot_info p { font-size: 20px; font-weight: 700; color: #263747; }
+#companies_images { /*padding-left: 2.5rem; padding-bottom: 2rem;*/ text-align: center; margin-left: 42.5px; }
+#free_assign { text-align: center; padding: 80px 0; margin-top: 120px; background-image: url("media/project/header_image.png"); color: white; }
+#free_assign h2 { font-size: 32px; font-weight: 400; }
+#free_assign h3 { font-size: 16px; font-weight: 400; }
+#summer_coding { background-color: #3336a0; margin-top: 5rem; padding: 0 40px; border-radius: 1rem; width: calc(100% - 80px); }
+#summer_coding a { text-decoration-line: none; }
+#summer_coding:hover { transform:translateY(-0.125rem); }
+#summer_coding div {color: white; margin: auto; }
+#main_recruit h1 { font-size: 20px; font-weight: 700; color: black; margin: 40px 0 10px 0; }
+#main_recruit h1 > a { float: right; padding: 1px 7px; }
+#main_recruit h1 > a:hover { background-color: #0053f4; }
+#job_fair > a { text-decoration: none; }
+#job_fair > a > div { border: 0.0625rem solid #d7e2e8; border-radius: 1rem; padding: 24px; }
+#main_recruit span { font-size: 12px; color: white; }
+#summer_coding_thumbnail { width: 8.5rem; height: 8.5rem; }
+#summer_coding_thumbnail > img { width: 100%; border-radius: 0.375rem; }
+#summer_coding_time { padding-left: 24px; }
+#summer_coding_time > h2 { color: black; font-size: 20px; font-weight: 700; margin: 0; }
+#summer_coding_time > h3 { color: black; font-size: 14px; font-weight: 400; margin-top: 0.25rem; }
+#all_of_recruit ul { list-style-type: none; }
+#all_of_recruit li { display: inline-block; }
+#all_of_tags > li { margin: 0 20px 12px 0; }
+#all_of_recruit a { text-decoration-line: none; color: #98a8b9; font-size: 16px; font-weight: 500; }
+#all_of_tags { text-align: center; margin: 0 0 8px 0; padding: 24px 160px 8px 160px; background-color: #f7f7fb;  border-radius: 1rem; }
+#all_of_tags a:hover { color: #0078ff; text-decoration-line: underline; }
+#all_of_informations { margin: 0; padding: 0; }
+#all_of_informations a:hover h2 { color: #0053f4; }
+#footer_title { font-size: 14px; font-weight: 400; color: #44576c; }
+#footer_extra { font-size: 0.6875rem; }
+.info_elements { margin: auto; width: 45%; }
+.root_anchors { list-style-type: none; display: inline-block; color: white; padding: 0; }
+.root_anchors a { text-decoration: none; color: white; }
+.root_selects { display: inline; padding: 13px 10px; }
+.header_bottom_divider { width: 0.0625rem; height: 2.5rem; position: relative; bottom: 40px; left: 50%; }
+.divider_elements { display: inline-block; margin: 0 2px; height: 0.25rem; border-radius: 6.25rem; }
+.recruit_flow_elements { display: inline-block; margin: 0 10px; width: calc((100% - 5rem) / 2); vertical-align: middle; }
+.recruit_flow_elements > img { border-radius: 1rem; width: 100%; }
+#right_elements { margin-left: 10rem; }
+.index { display: block; text-align: center; margin: 0;}
+.company { display: inline-block; vertical-align: top; margin: 0; width: 48%; }
+.company > img { height: 3rem; margin: 0.25rem; }
+.summer_coding_elements { display: inline-block; width: 49%; vertical-align: middle; }
+.summer_coding_elements > img { max-width: 100%; max-height: 12.5rem; text-align: center; }
+.summer_coding_elements > h2 { font-size: 12px; font-weight: 400; margin: 0 0 0.5rem 0; }
+.summer_coding_elements > h3 { font-size: 20px; font-weight: 500; margin: 0 0 0.5rem 0; }
+.summer_coding_elements > h4 { font-size: 0.9375rem; font-weight: 400; margin: 3.5rem 0 0 0; }
+.summer_coding_info { display: inline-block; vertical-align: top; }
+.summer_coding_info > div { margin-top: 16px; }
+.company_informations { width: 100%; padding: 1.5rem 0; }
+.company_informations:hover { box-shadow: 0 0.0625rem 0.125rem rgba(20, 20, 84, 0.12); padding-left: 1rem; padding-right: 1rem; margin-left: -1rem; margin-right: -1rem; }
+.company_informations div { display: inline-block; vertical-align: top; }
+.company_informations div > img { width: 4.5rem; margin-right: 1.5rem; }
+.company_informations h2, .company_informations h3 { color: black; margin: 0; }
+.company_informations h2 { font-size: 20px; font-weight: 700; }
+.company_informations h3 { font-size: 16px; font-weight: 400; }
+.company_informations ul { margin-top: 0.375rem; padding: 0; }
+.career_and_locate > li { font-size: 14px; margin-right: 1.5rem; }
+.specified_tags > li { font-size: 12px; font-weight: 500; color: #44576c; margin: 0 0.25rem 0.25rem 0; padding: 0.1875rem 0.5rem; border-radius: 0.1875rem; background-color: #e9ecf3; }
+.footer_list { color: #8ca5af; font-size: 0.8125rem; }
