@@ -152,7 +152,7 @@ LinkedBinTree::LinkedBinTree(string expression) : root(0)
  * *****************************************************************************/
 void LinkedBinTree::DestructLinkedBinTree(Node *a)
 {
-    if (a == 0) return;
+    if (a == NULL) return;
     DestructLinkedBinTree(a->left_link);
     DestructLinkedBinTree(a->right_link);
     delete a;

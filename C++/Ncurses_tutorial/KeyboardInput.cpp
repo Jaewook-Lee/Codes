@@ -1,7 +1,9 @@
-#include <ncurses.h>
+#include <ncursesw/curses.h>
+#include <locale.h>
 
 int main()
 {
+    setlocale(LC_CTYPE, "ko_KR.utf-8");
     char key, userName[8];
 
     initscr();
