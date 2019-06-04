@@ -1,3 +1,5 @@
+/* Author : Jaewook-Lee */
+/* Chaining */
 #include <iostream>
 using namespace std;
 
@@ -103,8 +105,10 @@ class Hash
 {
     SingleLinkedList* hash_table;
     int hashFunction(char) const;
+    int item_num = 0;
     public:
-        Hash() { hash_table = new SingleLinkedList[HASH_SIZE]; };
+        Hash() { hash_table = new SingleLinkedList[HASH_SIZE]; }
+        bool isEmpty();
         bool findData(char) const;
         void insertData(char);
         void deleteData(char);
@@ -117,10 +121,12 @@ int Hash::hashFunction(char data) const
     if (key >= 65 && key <= 90) key += 32;
     return (key - 97);
 }
+bool Hash::isEmpty() { return (item_num == 0); }
 void Hash::insertData(char data)
 {
     int key = hashFunction(data);
     (hash_table + key)->insertNode(data, key);
+    item_num++;
 }
 void Hash::deleteData(char data)
 {
@@ -128,6 +134,7 @@ void Hash::deleteData(char data)
     {
         int key = hashFunction(data);
         (hash_table + key)->deleteNode(data);
+        item_num--;
     }
     else cout << data << " is not here!\n";
 }
@@ -151,6 +158,10 @@ void Hash::printHash() const
 int main()
 {
     Hash hash;
+    
+    if(hash.isEmpty()) cout << "Hash is Empty now.\n";
+    else cout << "Something in it!\n";
+
     hash.insertData('A');
     hash.insertData('B');
     hash.insertData('D');
