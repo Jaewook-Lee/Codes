@@ -1,17 +1,15 @@
-/* Author : Jaewook-Lee */
-/* Chaining */
 #include <iostream>
 using namespace std;
 
 struct Node
 {
     int key = -1;
-    char data;
+    int data;
     Node* link = 0;
     public:
         Node();
-        Node(char data) { this->data = data; }
-        Node(int key, char data)
+        Node(int data) { this->data = data; }
+        Node(int key, int data)
         {
             this->data = data;
             this->key = key;
@@ -34,7 +32,7 @@ class SingleLinkedList
                 delete p;
             }
         }
-        void insertNode(char data, int key)
+        void insertNode(int data, int key)
         {
             Node *temp = new Node(key, data);
 
@@ -46,7 +44,7 @@ class SingleLinkedList
                 p->link = temp;
             }    
         }
-        void deleteNode(char data)
+        void deleteNode(int data)
         {
             Node *p, *q;
 
@@ -84,10 +82,11 @@ class SingleLinkedList
                     cout << p->data << "->";
                     p = p->link;
                 }
-                cout << p->data << endl;
+                cout << p->data;
             }
+            cout << endl;
         }
-        bool search(char data)
+        bool search(int data)
         {
             Node *p;
             if (head != 0)
@@ -100,35 +99,29 @@ class SingleLinkedList
         }
 };
 
-const int HASH_SIZE = 26;
-class Hash
+const int HASH_SIZE = 7;
+class HTable
 {
     SingleLinkedList* hash_table;
-    int hashFunction(char) const;
+    int hashFunction(int key) const { return (key % HASH_SIZE); }
     int item_num = 0;
     public:
-        Hash() { hash_table = new SingleLinkedList[HASH_SIZE]; }
+        HTable() { hash_table = new SingleLinkedList[HASH_SIZE]; }
         bool isEmpty();
-        bool findData(char) const;
-        void insertData(char);
-        void deleteData(char);
+        bool findData(int) const;
+        void insertData(int);
+        void deleteData(int);
         void printHash() const;
         friend class SingleLinkedList;
 };
-int Hash::hashFunction(char data) const
-{
-    int key = (int)data;
-    if (key >= 65 && key <= 90) key += 32;
-    return (key - 97);
-}
-bool Hash::isEmpty() { return (item_num == 0); }
-void Hash::insertData(char data)
+bool HTable::isEmpty() { return (item_num == 0); }
+void HTable::insertData(int data)
 {
     int key = hashFunction(data);
     (hash_table + key)->insertNode(data, key);
     item_num++;
 }
-void Hash::deleteData(char data)
+void HTable::deleteData(int data)
 {
     if (findData(data))
     {
@@ -138,7 +131,7 @@ void Hash::deleteData(char data)
     }
     else cout << data << " is not here!\n";
 }
-bool Hash::findData(char data) const
+bool HTable::findData(int data) const
 {
     int key = hashFunction(data);
     if ((hash_table + key)->isEmpty()) return false;
@@ -148,45 +141,55 @@ bool Hash::findData(char data) const
         else return false;
     }
 }
-void Hash::printHash() const
+void HTable::printHash() const
 {
-    cout << "-----Current Hash--------" << endl;
-    for (int i=0; i<HASH_SIZE; i++) (hash_table + i)->traverse();
-    cout << "-------------------------" << endl;
+    for (int i=0; i<HASH_SIZE; i++)
+    {
+        cout << "HTable[" << i << "]: ";
+        (hash_table + i)->traverse();
+    }
 }
 
 int main()
 {
-    Hash hash;
-    
-    if(hash.isEmpty()) cout << "Hash is Empty now.\n";
-    else cout << "Something in it!\n";
+    HTable hash;
+    bool exit = false;
+    char command;
+    while (!exit)
+    {
+        cout << "Enter command(i, f, d, q) : ";
+        cin >> command;
+        if (command == 'q') break;
 
-    hash.insertData('A');
-    hash.insertData('B');
-    hash.insertData('D');
-    hash.insertData('a');
-    hash.insertData('Z');
-    hash.printHash();
-    hash.deleteData('C');
-    hash.deleteData('Z');
-
-    if(hash.findData('Z')) cout << "Found Z!\n";
-    else cout << "Not Found Z...\n";
-
-    if(hash.findData('D')) cout << "Found D!\n";
-    else cout << "Not Found D...\n";
-    
-    hash.insertData('E');
-    hash.insertData('E');
-    hash.insertData('E');
-    hash.insertData('X');
-    hash.insertData('g');
-    hash.insertData('G');
-    hash.printHash();
-
-    hash.deleteData('g');
-    hash.printHash();
-    
+        int key;
+        cout << "Enter key: ";
+        cin >> key;
+        switch(command)
+        {
+            case 'i':
+            {
+                hash.insertData(key);
+                break;
+            }    char command;
+            case 'f':
+            {
+                bool found = hash.findData(key);
+                if (!found) cout << "\"Key Not Found\"\n";
+                else cout << "\"Hash value: " << key % HASH_SIZE << ", Key is Found.\"\n";   
+                break;
+            }
+            case 'd':
+            {
+                hash.deleteData(key);
+                break;
+            }
+            default:
+            {
+                cout << "Bad Command!\n";
+                break;
+            }
+        }
+        hash.printHash();
+    }
     return 0;
 }
