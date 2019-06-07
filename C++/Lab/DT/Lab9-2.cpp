@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <queue>
 using namespace std;
 
 struct Node
@@ -25,7 +26,7 @@ class Graph
             array = new Node*[n];
             for (int i=0; i<size; i++) { *(array + i) = 0; } // Initialize all of elements to null
         }
-        ~Graph() { delete array; }
+        ~Graph() { delete[] array; }
         void addEdge(int start, int end)
         {
             Node *start_vertex = new Node(start);
@@ -56,19 +57,28 @@ class Graph
                 cout << endl;
             }
         }
-        void dfs(bool *visited, int start_vertex=0) 
+        void bfs(bool *visited, int start_vertex=0) 
         {
-            Node *next;
-            *(visited + start_vertex) = true;
-            cout << "Vertex " << start_vertex;
+            queue<Node*> bfs_search_queue;
+            bfs_search_queue.push(array[start_vertex]);
+            visited[start_vertex] = true;
 
-            for (next=array[start_vertex]; next!=0; next=next->link)
-                if (!visited[next->data])
+            while (!bfs_search_queue.empty())
+            {
+                Node* print = bfs_search_queue.front();
+                bfs_search_queue.pop();
+                cout << "Vertex " << print->data << ", ";
+                while (print->link != 0)
                 {
-                    cout << "->";
-                    dfs(visited, next->data);
+                    if (!visited[print->link->data])
+                    {
+                        bfs_search_queue.push(array[print->link->data]);
+                        visited[print->link->data] = true;
+                    }
+                    print = print->link;
                 }
-            if (start_vertex == 0) cout << endl;
+            }
+            cout << endl;
         }
 };
 
@@ -76,46 +86,30 @@ void makeGraph(string, Graph&);
 int main()
 {
     Graph g;
-    makeGraph("lab9.dat", g); // Data is looks like a two-dimensional array.
+    makeGraph("lab9-2.dat", g); // Data is looks like a two-dimensional array.
 
     g.printGraph();
 
     bool visited[g.size] = {false};
-    g.dfs(visited);
+    g.bfs(visited);
     return 0;
 }
 
 void makeGraph(const string file_name, Graph &graph)
 {
-    const int BUFFER_SIZE = 100;
     ifstream reader;
     reader.open(file_name);
+    int size, data;
+    reader >> size;
+    graph = Graph(size);
 
-    char buffer[BUFFER_SIZE];
-    int row_size = 0; // For making a graph by using size.
-    int vertex_number = 0; // Initialized start vertex's number.
-    while (!reader.eof())
+    for (int start_vertex=0; start_vertex<size; start_vertex++)
     {
-        reader.getline(buffer, BUFFER_SIZE);
-        if (reader.eof()) break;
-
-        if (row_size == 0) // Call constructor of graph
+        for (int end_vertex = 0; end_vertex<size; end_vertex++)
         {
-            for (int i=0; i<strlen(buffer); i++)
-            {
-                if (buffer[i] == ' ') continue;
-                else row_size++;
-            }
-            graph = Graph(row_size);
+            reader >> data;
+            if (data == 1) graph.addEdge(start_vertex, end_vertex);
         }
-
-        for (int i=0; i<strlen(buffer); i++)
-        {
-            if (buffer[i] == ' ') continue;
-            if (buffer[i] - '0' == 1) graph.addEdge(vertex_number, i/2);
-        }
-
-        vertex_number++;
     }
     reader.close();
 }
