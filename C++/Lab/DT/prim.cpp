@@ -17,7 +17,7 @@ int sum(int*, int);
 void prim(const string, int=0);
 int main()
 {
-    prim("prim_ex_input.dat", 1);
+    prim("prim_ex_input.dat");
     return 0;
 }
 

@@ -17,7 +17,7 @@ class BinarySearchTree
         BinarySearchTree() : root(0) {}
         Node* insertVal (Node*, int);
         Node* deleteVal(Node*, int);
-        void searchVal(Node*, int);
+        bool searchVal(Node*, int);
         int leaf(Node*);
         Node* findMax(Node*);
         void infixTraverse(Node *a);
@@ -38,7 +38,7 @@ Node* BinarySearchTree::insertVal(Node *ptr, int key)
 }
 Node* BinarySearchTree::deleteVal(Node *a, int key)
 {
-    if (a == NULL) std::cout << "Tree is Empty!\n";
+    if (a == NULL) std::cout << "Key Not Found!\n";
     else
     {
         if (key < a->value)
@@ -67,36 +67,25 @@ Node* BinarySearchTree::deleteVal(Node *a, int key)
     }
     return a;
 }
-void BinarySearchTree::searchVal(Node *a, int key)
+bool BinarySearchTree::searchVal(Node *a, int key)
 {
-    bool checker = false;
-
-    if (a == root && a == NULL)
-    {
-        cout << "Tree is Empty!";
-        return;
-    }
-
-    if (a == NULL) return;
+    bool checker;
+    if (a == NULL) checker = false;
     else
     {
-        if (key == a->value)
-        {
-            cout << "Found\n";
-            checker = true;
-            return;
-        }
-        else if (key < a->value) searchVal(a->left, key);
-        else if (key > a->value) searchVal(a->right, key);
+        if (key == a->value) checker = true;
+        else if (key < a->value) checker = searchVal(a->left, key);
+        else checker = searchVal(a->right, key);
     }
-    if (!checker && a == root) cout << "Not found\n";
+
+    return checker;
 }
 int BinarySearchTree::leaf(Node *a)
 {
     unsigned int count = 0;
-    if (a == NULL) return count;
+    if (a == NULL) return 0;
 
-    if (a->left == NULL && a->right == NULL) count++;
+    if (a->left == NULL && a->right == NULL) count += 1;
     else count = leaf(a->left) + leaf(a->right);
     
     return count;
@@ -195,11 +184,15 @@ int main()
                 bst.deleteVal(bst.root, delete_value);
                 break;
             case 3:
-                int search_value;
-                cout << "Enter number to search : ";
-                cin >> search_value;
-                bst.searchVal(bst.root, search_value);
-                break;
+                {
+                    int search_value;
+                    cout << "Enter number to search : ";
+                    cin >> search_value;
+                    bool checker = bst.searchVal(bst.root, search_value);
+                    if (checker) cout << "Found!" << endl;
+                    else cout << "Not Found" << endl;
+                    break;
+                }
             case 4:
                 bst.drawTree(bst.root);
                 break;

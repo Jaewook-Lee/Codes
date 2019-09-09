@@ -162,32 +162,25 @@ int main()
         if (command == 'q') break;
 
         int key;
+        bool found;
         cout << "Enter key: ";
         cin >> key;
         switch(command)
         {
             case 'i':
-            {
                 hash.insertData(key);
                 break;
-            }    char command;
             case 'f':
-            {
-                bool found = hash.findData(key);
+                found = hash.findData(key);
                 if (!found) cout << "\"Key Not Found\"\n";
                 else cout << "\"Hash value: " << key % HASH_SIZE << ", Key is Found.\"\n";   
                 break;
-            }
             case 'd':
-            {
                 hash.deleteData(key);
                 break;
-            }
             default:
-            {
                 cout << "Bad Command!\n";
                 break;
-            }
         }
         hash.printHash();
     }
