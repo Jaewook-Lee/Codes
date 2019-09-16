@@ -1,0 +1,8 @@
+library(gdata)
+student_data = read.xls("st_data.xls")
+print(nrow(student_data))
+print(ncol(student_data))
+print(student_data[3, ])
+print(student_data[5, ])
+print(student_data[, 1])
+print(student_data[, 3])
